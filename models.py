@@ -102,29 +102,24 @@ class DCGAN_Generator(nn.Module):
     def __init__(self, latent_dim=100):
         super().__init__()
         self.model = nn.Sequential(
-            # Input: (batch, latent_dim, 1, 1) -> Output: (128, 7, 7)
             nn.ConvTranspose2d(latent_dim, 128, kernel_size=7, stride=1, padding=0, bias=False),
             nn.BatchNorm2d(128), nn.ReLU(True),
-            # Output: (64, 14, 14)
             nn.ConvTranspose2d(128, 64, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(64), nn.ReLU(True),
-            # Output: (1, 28, 28)
             nn.ConvTranspose2d(64, 1, kernel_size=4, stride=2, padding=1, bias=False),
             nn.Sigmoid()
         )
 
     def forward(self, z):
-        z = z.view(-1, z.size(1), 1, 1) # Reshape noise vektor menjadi format spatial 1x1
+        z = z.view(-1, z.size(1), 1, 1) 
         return self.model(z)
 
 class DCGAN_Discriminator(nn.Module):
     def __init__(self):
         super().__init__()
         self.features = nn.Sequential(
-            # Input: (1, 28, 28) -> Output: (64, 14, 14)
             nn.Conv2d(1, 64, kernel_size=4, stride=2, padding=1, bias=False),
             nn.LeakyReLU(0.2, inplace=True),
-            # Output: (128, 7, 7)
             nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(128), nn.LeakyReLU(0.2, inplace=True)
         )
@@ -135,5 +130,5 @@ class DCGAN_Discriminator(nn.Module):
 
     def forward(self, x):
         out = self.features(x)
-        out = out.view(out.size(0), -1) # Flatten
+        out = out.view(out.size(0), -1)
         return self.classifier(out)
