@@ -64,8 +64,8 @@ Seluruh eksperimen dijalankan menggunakan akselerasi GPU **NVIDIA Tesla T4** pad
 
 ### 1. Kloning Repositori dan Instalasi Dependensi
 ```bash
-git clone [https://github.com/username/Deep-Learning-Assignment-6-7.git](https://github.com/username/Deep-Learning-Assignment-6-7.git)
-cd Deep-Learning-Assignment-6-7
+git clone [https://github.com/username/Deep-Learning-Assignment-7.git](https://github.com/username/Deep-Learning-Assignment-7.git)
+cd Deep-Learning-Assignment-7
 pip install -r requirements.txt
 ```
 
